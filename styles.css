@@ -670,7 +670,7 @@ body {
 }
 
 /* ================================
-   RESPONSIVE DESIGN - FIXED FOR MOBILE
+   RESPONSIVE DESIGN - OPTIMIZED FOR MOBILE
    ================================ */
 
 /* Large tablets and small laptops */
@@ -689,7 +689,7 @@ body {
     }
 }
 
-/* Tablets - KEEP FULL HEIGHT */
+/* Tablets - ENHANCED MOBILE EXPERIENCE */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -706,31 +706,33 @@ body {
     .hero {
         min-height: 100vh;
         min-height: calc(var(--vh, 1vh) * 100);
-        padding: 1rem 0;
+        padding: 3rem 0;
     }
 
     .hero h1 {
-        font-size: clamp(2.5rem, 8vw, 4rem);
-        margin-bottom: 1.5rem;
+        font-size: clamp(3.5rem, 10vw, 5rem);
+        margin-bottom: 2rem;
     }
 
     .hero-subtitle {
-        font-size: clamp(1rem, 4vw, 1.3rem);
-        margin-bottom: 2rem;
+        font-size: clamp(1.3rem, 5vw, 1.6rem);
+        margin-bottom: 3rem;
     }
 
     .cta-buttons {
         flex-direction: column;
         align-items: center;
-        gap: 1rem;
+        gap: 1.5rem;
+        margin-top: 1rem;
     }
 
     .btn {
         width: 100%;
-        max-width: 320px;
+        max-width: 350px;
         justify-content: center;
-        padding: 1.2rem 2rem;
-        font-size: 1rem;
+        padding: 1.4rem 2rem;
+        font-size: 1.1rem;
+        min-height: 56px;
     }
 
     .features {
@@ -775,7 +777,7 @@ body {
     }
 }
 
-/* Large phones - KEEP FULL HEIGHT */
+/* Large phones - ENHANCED TYPOGRAPHY AND SPACING */
 @media (max-width: 480px) {
     .container {
         padding: 0 0.75rem;
@@ -784,25 +786,26 @@ body {
     .hero {
         min-height: 100vh;
         min-height: calc(var(--vh, 1vh) * 100);
-        padding: 0.5rem 0;
+        padding: 2rem 0;
         justify-content: center;
     }
 
     .hero h1 {
-        font-size: clamp(2rem, 10vw, 3rem);
-        margin-bottom: 1rem;
+        font-size: clamp(2.8rem, 12vw, 4rem);
+        margin-bottom: 1.5rem;
     }
 
     .hero-subtitle {
-        font-size: clamp(0.9rem, 4vw, 1.1rem);
-        margin-bottom: 1.5rem;
+        font-size: clamp(1.1rem, 5vw, 1.4rem);
+        margin-bottom: 2.5rem;
         padding: 0 0.5rem;
     }
 
     .btn {
-        padding: 1rem 1.5rem;
-        font-size: 0.95rem;
-        max-width: 280px;
+        padding: 1.2rem 1.5rem;
+        font-size: 1rem;
+        max-width: 320px;
+        min-height: 54px;
     }
 
     .features {
@@ -857,7 +860,7 @@ body {
     }
 }
 
-/* Small phones - KEEP FULL HEIGHT */
+/* Small phones - OPTIMIZED FOR SMALLEST SCREENS */
 @media (max-width: 360px) {
     .container {
         padding: 0 0.5rem;
@@ -870,10 +873,17 @@ body {
     .hero {
         min-height: 100vh;
         min-height: calc(var(--vh, 1vh) * 100);
+        padding: 1.5rem 0;
     }
 
     .hero h1 {
-        font-size: clamp(1.75rem, 12vw, 2.5rem);
+        font-size: clamp(2.5rem, 14vw, 3.5rem);
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 5vw, 1.25rem);
+        margin-bottom: 2rem;
     }
 
     .feature-card {
@@ -890,8 +900,9 @@ body {
     }
 
     .btn {
-        padding: 0.9rem 1.25rem;
-        font-size: 0.9rem;
+        padding: 1.1rem 1.25rem;
+        font-size: 0.95rem;
+        min-height: 52px;
     }
 }
 
@@ -899,13 +910,13 @@ body {
    MOBILE-SPECIFIC ENHANCEMENTS
    ================================ */
 
-/* Better touch targets for mobile */
+/* Touch-optimized interactions */
 @media (max-width: 768px) {
     .btn, .form-input, .form-select, .submit-btn {
-        min-height: 48px; /* Recommended touch target size */
+        min-height: 48px; /* Accessibility touch target size */
     }
 
-    /* Remove hover effects on touch devices */
+    /* Disable hover effects on touch devices */
     .feature-card:hover {
         transform: none;
     }
@@ -914,7 +925,7 @@ body {
         transform: none;
     }
 
-    /* Add better active states for touch */
+    /* Enhanced touch feedback */
     .btn:active {
         transform: scale(0.98);
         transition: transform 0.1s ease;
@@ -925,28 +936,26 @@ body {
         transition: transform 0.1s ease;
     }
 
-    /* Improve form focus states for mobile */
+    /* Mobile-optimized form interactions */
     .form-input:focus, .form-select:focus {
         transform: none;
         border-width: 2px;
     }
 
-    /* Better spacing for mobile form */
     .form-group {
         margin-bottom: 1.5rem;
     }
 
-    /* Optimize floating shapes for mobile performance */
+    /* Performance optimizations for mobile */
     .floating-shapes {
-        display: none; /* Hide on mobile for better performance */
+        display: none; /* Hidden for better performance */
     }
 
-    /* Simplify animations on mobile */
     .bg-animation::before {
-        animation: none;
+        animation: none; /* Disabled for performance */
     }
 
-    /* Better mobile typography */
+    /* Mobile typography enhancements */
     .features p {
         font-size: 1rem;
         line-height: 1.6;
@@ -958,12 +967,12 @@ body {
     }
 }
 
-/* Landscape phone orientation - KEEP FULL HEIGHT */
+/* Landscape orientation optimization */
 @media (max-width: 768px) and (orientation: landscape) {
     .hero {
         min-height: 100vh;
         min-height: calc(var(--vh, 1vh) * 100);
-        padding: 1rem 0;
+        padding: 1.5rem 0;
     }
 
     .features {
@@ -975,9 +984,44 @@ body {
     }
 }
 
-/* High DPI displays */
+/* High-resolution display optimization */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .glass {
-        backdrop-filter: blur(15px); /* Reduce blur for better performance on high DPI */
+        backdrop-filter: blur(15px); /* Optimized blur for high DPI */
+    }
+}
+
+/* Ultra-wide mobile screens */
+@media (max-width: 768px) and (min-aspect-ratio: 2/1) {
+    .hero {
+        padding: 2rem 0;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 4vw, 1.2rem);
+    }
+}
+
+/* Improved accessibility for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero h1 {
+        animation: none;
+    }
+
+    .floating-shapes {
+        display: none;
+    }
+
+    .bg-animation::before {
+        animation: none;
+    }
+
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
     }
 }
