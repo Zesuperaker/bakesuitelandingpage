@@ -235,18 +235,53 @@ function initMobilePerformanceOptimizations() {
 }
 
 // ================================
-// VIEWPORT HEIGHT FIX FOR MOBILE
+// ENHANCED VIEWPORT HEIGHT FIX FOR MOBILE
 // ================================
 function setMobileViewportHeight() {
     // Fix for mobile viewport height issues with address bars
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    // Debug log to see what's happening (remove in production)
+    console.log(`Viewport height set to: ${window.innerHeight}px, --vh: ${vh}px`);
 }
 
-window.addEventListener('resize', setMobileViewportHeight);
-window.addEventListener('orientationchange', () => {
-    setTimeout(setMobileViewportHeight, 100);
+// Initial call
+setMobileViewportHeight();
+
+// Update on resize with debounce
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(setMobileViewportHeight, 100);
 });
+
+// Update on orientation change with delay
+window.addEventListener('orientationchange', () => {
+    // Delay to account for mobile browser UI changes
+    setTimeout(setMobileViewportHeight, 500);
+});
+
+// Additional check for iOS Safari address bar behavior
+if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    // Listen for scroll events to recalculate when address bar shows/hides
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            if (Math.abs(window.innerHeight - document.documentElement.clientHeight) > 50) {
+                setMobileViewportHeight();
+            }
+        }, 150);
+    }, { passive: true });
+
+    // Also check when page becomes visible again
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            setTimeout(setMobileViewportHeight, 100);
+        }
+    });
+}
 
 // ================================
 // FORM HANDLING & VALIDATION

@@ -141,10 +141,11 @@ body {
 }
 
 /* ================================
-   HERO SECTION
+   HERO SECTION - FIXED FOR MOBILE
    ================================ */
 .hero {
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
     display: flex;
     align-items: center;
     position: relative;
@@ -602,52 +603,6 @@ body {
 }
 
 /* ================================
-   RESPONSIVE DESIGN
-   ================================ */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-    }
-
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .demo-container {
-        padding: 2rem 1rem;
-    }
-
-    .demo-form {
-        padding: 2rem;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-
-/* ================================
    MOBILE NAVIGATION
    ================================ */
 .mobile-menu-btn {
@@ -715,7 +670,7 @@ body {
 }
 
 /* ================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - FIXED FOR MOBILE
    ================================ */
 
 /* Large tablets and small laptops */
@@ -734,7 +689,7 @@ body {
     }
 }
 
-/* Tablets */
+/* Tablets - KEEP FULL HEIGHT */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -749,7 +704,8 @@ body {
     }
 
     .hero {
-        min-height: 90vh;
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
         padding: 2rem 0;
     }
 
@@ -819,15 +775,17 @@ body {
     }
 }
 
-/* Large phones */
+/* Large phones - KEEP FULL HEIGHT */
 @media (max-width: 480px) {
     .container {
         padding: 0 0.75rem;
     }
 
     .hero {
-        min-height: 85vh;
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
         padding: 1rem 0;
+        justify-content: center;
     }
 
     .hero h1 {
@@ -848,7 +806,7 @@ body {
     }
 
     .features {
-        padding: 1rem 0;
+        padding: 3rem 0;
     }
 
     .features h2 {
@@ -899,7 +857,7 @@ body {
     }
 }
 
-/* Small phones */
+/* Small phones - KEEP FULL HEIGHT */
 @media (max-width: 360px) {
     .container {
         padding: 0 0.5rem;
@@ -907,6 +865,11 @@ body {
 
     .hero-content {
         padding: 0 0.5rem;
+    }
+
+    .hero {
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
     }
 
     .hero h1 {
@@ -995,10 +958,11 @@ body {
     }
 }
 
-/* Landscape phone orientation */
+/* Landscape phone orientation - KEEP FULL HEIGHT */
 @media (max-width: 768px) and (orientation: landscape) {
     .hero {
         min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
         padding: 1rem 0;
     }
 
