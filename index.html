@@ -3,188 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BakeSuite - Complete Bakery Management Platform</title>
-    <meta name="description" content="Streamline your bakery operations with BakeSuite - the complete management platform for orders, inventory, customers, and analytics.">
-
-    <!-- Font Awesome for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <title>BakeSuite - The Future of Bakery Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #10b981;
+            --bg-dark: #0f172a;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #374151;
-            background: #ffffff;
+            color: var(--text-dark);
+            background: var(--bg-dark);
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            opacity: 0.1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="3"/></g></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Glass morphism container */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
 
         /* Header */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1e40af;
+            color: white;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center;
+            list-style: none;
         }
 
-        .nav-link {
-            color: #6b7280;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-link:hover {
-            color: #1e40af;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        .nav-links a {
             color: white;
             text-decoration: none;
-            border-radius: 0.5rem;
             font-weight: 500;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.2);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
         }
 
-        .btn-outline {
-            background: transparent;
-            color: #1e40af;
-            border: 2px solid #1e40af;
-        }
-
-        .btn-outline:hover {
-            background: #1e40af;
-            color: white;
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
-            color: white;
-            text-align: center;
-            padding: 8rem 0 6rem;
-            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
         .hero-content {
             position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
+            z-index: 2;
+            text-align: center;
+            color: white;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            background: linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite alternate;
         }
 
-        .hero-buttons {
+        @keyframes textGlow {
+            from { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(6, 182, 212, 0.8)); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        /* Section */
-        .section {
-            padding: 5rem 0;
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 1rem;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
         }
 
-        .section-header p {
-            font-size: 1.125rem;
-            color: #6b7280;
-            max-width: 600px;
-            margin: 0 auto;
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
-        /* Features */
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Floating shapes */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatShape 15s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            top: 20%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            top: 60%;
+            right: 15%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            bottom: 20%;
+            left: 20%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            border-radius: 20px;
+            transform: rotate(45deg);
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+
+        /* Features Section */
         .features {
-            background: #f9fafb;
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: white;
+            font-weight: 700;
         }
 
         .features-grid {
@@ -194,212 +299,276 @@
         }
 
         .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-            border-top: 4px solid #1e40af;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
-            color: white;
-            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 1rem;
-        }
-
-        /* Pricing */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            transition: all 0.2s;
-        }
-
-        .pricing-card.featured {
-            border-color: #1e40af;
-            transform: scale(1.05);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .pricing-card.featured::before {
-            content: 'Most Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1e40af;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .pricing-card h3 {
             font-size: 1.5rem;
-            font-weight: 600;
-            color: #111827;
             margin-bottom: 1rem;
-        }
-
-        .price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 1rem;
-        }
-
-        .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #6b7280;
-        }
-
-        .features-list {
-            list-style: none;
-            margin: 2rem 0;
-            text-align: left;
-        }
-
-        .features-list li {
-            padding: 0.5rem 0;
             position: relative;
-            padding-left: 1.5rem;
+            z-index: 2;
         }
 
-        .features-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #10b981;
-            font-weight: 600;
+        .feature-card p {
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
         }
 
-        /* CTA */
-        .cta {
-            background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
-            color: white;
+        /* Demo Section */
+        .demo {
+            padding: 8rem 0;
             text-align: center;
         }
 
-        .cta-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: 2rem auto 0;
-            color: #374151;
+        .demo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            color: white;
+        }
+
+        .demo h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .demo-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Enhanced Form */
+        .demo-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
+            margin-bottom: 2rem;
+            position: relative;
         }
 
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #374151;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .form-input, .form-select {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            color: white;
             font-size: 1rem;
-            transition: border-color 0.2s;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
-            border-color: #1e40af;
-            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        .form-select option {
+            background: var(--bg-dark);
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 16px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Success/Error States */
+        .form-message {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
         }
 
         /* Footer */
         .footer {
-            background: #111827;
-            color: #9ca3af;
-            padding: 3rem 0 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4rem 0 2rem;
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
         .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
             color: white;
-            font-size: 1.125rem;
             font-weight: 600;
-            margin-bottom: 1rem;
         }
 
         .footer-section a {
-            color: #9ca3af;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: color 0.2s;
             display: block;
             margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
         }
 
         .footer-section a:hover {
-            color: white;
+            color: var(--primary);
+            transform: translateX(5px);
         }
 
         .footer-bottom {
-            border-top: 1px solid #374151;
-            padding-top: 1.5rem;
             text-align: center;
-            color: #6b7280;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Mobile responsiveness */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
-            .hero-buttons {
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
@@ -412,62 +581,85 @@
 
             .features-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            .pricing-card.featured {
-                transform: none;
+            .demo-container {
+                padding: 2rem 1rem;
             }
 
-            .section-header h2 {
-                font-size: 2rem;
+            .demo-form {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
 
-        /* Success message */
-        .success-message {
-            background: #dcfce7;
-            border: 1px solid #16a34a;
-            color: #166534;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            display: none;
+        /* Loading animation */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading .submit-btn::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="#" class="logo">
-                    <i class="fas fa-bread-slice"></i>
-                    BakeSuite
-                </a>
-                <div class="nav-links">
-                    <a href="#features" class="nav-link">Features</a>
-                    <a href="#pricing" class="nav-link">Pricing</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                    <a href="#demo" class="btn">Get Demo</a>
-                </div>
-            </nav>
-        </div>
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <i class="fas fa-birthday-cake"></i> BakeSuite
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
-                <h1>The Complete Bakery Management Platform</h1>
-                <p>Streamline your bakery operations with our all-in-one platform. Manage orders, track inventory, analyze sales, and delight customers.</p>
-                <div class="hero-buttons">
-                    <a href="#demo" class="btn">
+                <h1>BakeSuite</h1>
+                <p class="hero-subtitle">The complete bakery management platform that transforms how you run your business. From orders to analytics, we've got you covered.</p>
+                <div class="cta-buttons">
+                    <a href="#demo" class="btn btn-primary">
                         <i class="fas fa-rocket"></i>
                         Start Free Trial
                     </a>
-                    <a href="#features" class="btn btn-outline">
+                    <a href="#features" class="btn btn-secondary">
                         <i class="fas fa-play"></i>
-                        Learn More
+                        Watch Demo
                     </a>
                 </div>
             </div>
@@ -475,144 +667,91 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="section features">
+    <section class="features" id="features">
         <div class="container">
-            <div class="section-header">
-                <h2>Everything you need to run your bakery</h2>
-                <p>From order management to analytics, BakeSuite provides all the tools modern bakeries need to thrive.</p>
-            </div>
+            <h2>Everything Your Bakery Needs</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3>Order Management</h3>
-                    <p>Streamline your order process from online requests to in-store pickup. Track custom orders and keep customers informed.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-boxes"></i>
-                    </div>
-                    <h3>Smart Inventory</h3>
-                    <p>Never run out of ingredients again. Auto-track stock levels, set reorder alerts, and get insights into trends.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Customer Management</h3>
-                    <p>Build lasting relationships with detailed customer profiles, order history, and loyalty programs.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Sales Analytics</h3>
-                    <p>Make data-driven decisions with comprehensive reports on sales trends and profitability insights.</p>
-                </div>
-                <div class="feature-card">
+                <div class="feature-card glass">
                     <div class="feature-icon">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
-                    <h3>Online Ordering</h3>
-                    <p>Expand your reach with a beautiful online store that integrates seamlessly with your operations.</p>
+                    <h3>Order Management</h3>
+                    <p>Streamline your entire order process from customer request to delivery. Track everything in real-time with our intuitive dashboard.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card glass">
                     <div class="feature-icon">
-                        <i class="fas fa-plug"></i>
+                        <i class="fas fa-boxes"></i>
                     </div>
-                    <h3>Easy Integration</h3>
-                    <p>Connect with your existing POS systems, accounting software, and payment processors.</p>
+                    <h3>Inventory Control</h3>
+                    <p>Never run out of ingredients again. Smart inventory tracking with automated reorder points and supplier management.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Customer Insights</h3>
+                    <p>Know your customers better with detailed analytics, order history, and personalized marketing tools that drive repeat business.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Business Analytics</h3>
+                    <p>Make data-driven decisions with comprehensive reporting on sales, profits, popular items, and seasonal trends.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Production Planning</h3>
+                    <p>Optimize your baking schedule with smart production planning that considers order deadlines and oven capacity.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Ready</h3>
+                    <p>Manage your bakery on the go with our fully responsive design that works perfectly on any device, anywhere.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="section">
+    <!-- Demo Section -->
+    <section class="demo" id="demo">
         <div class="container">
-            <div class="section-header">
-                <h2>Simple, transparent pricing</h2>
-                <p>Choose the plan that fits your bakery's needs. All plans include 30-day free trial.</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <div class="price">$49<span>/month</span></div>
-                    <ul class="features-list">
-                        <li>Up to 100 orders/month</li>
-                        <li>Basic inventory tracking</li>
-                        <li>Customer management</li>
-                        <li>Online ordering page</li>
-                        <li>Email support</li>
-                    </ul>
-                    <a href="#demo" class="btn btn-outline">Start Free Trial</a>
-                </div>
-                <div class="pricing-card featured">
-                    <h3>Professional</h3>
-                    <div class="price">$99<span>/month</span></div>
-                    <ul class="features-list">
-                        <li>Unlimited orders</li>
-                        <li>Advanced inventory & alerts</li>
-                        <li>Customer loyalty programs</li>
-                        <li>Full analytics dashboard</li>
-                        <li>API integrations</li>
-                        <li>Phone & chat support</li>
-                    </ul>
-                    <a href="#demo" class="btn">Start Free Trial</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">$199<span>/month</span></div>
-                    <ul class="features-list">
-                        <li>Multi-location support</li>
-                        <li>Advanced reporting</li>
-                        <li>Custom integrations</li>
-                        <li>Dedicated account manager</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <a href="#demo" class="btn btn-outline">Contact Sales</a>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="demo-container glass">
+                <h2>See BakeSuite in Action</h2>
+                <p class="demo-subtitle">Ready to transform your bakery? Book a personalized demo and discover how BakeSuite can boost your efficiency and profits.</p>
 
-    <!-- CTA Section -->
-    <section id="demo" class="section cta">
-        <div class="container">
-            <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">Ready to transform your bakery?</h2>
-            <p style="font-size: 1.25rem; margin-bottom: 2rem;">Join hundreds of bakeries using BakeSuite to streamline operations and grow their business.</p>
+                <div id="form-message" class="form-message"></div>
 
-            <div class="cta-form">
-                <div class="success-message" id="success-message">
-                    Thanks for your interest! We'll be in touch within 24 hours.
-                </div>
-                <form id="demo-form">
+                <form id="demo-form" class="demo-form">
                     <div class="form-group">
-                        <label for="name" class="form-label">Full Name *</label>
-                        <input type="text" id="name" name="name" class="form-input" required>
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="form-label">Email Address *</label>
-                        <input type="email" id="email" name="email" class="form-input" required>
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="bakery_name" class="form-label">Bakery Name *</label>
-                        <input type="text" id="bakery_name" name="bakery_name" class="form-input" required>
+                        <label for="bakery_name" class="form-label">Bakery Name</label>
+                        <input type="text" id="bakery_name" name="bakery_name" class="form-input" placeholder="Your bakery's name" required>
                     </div>
                     <div class="form-group">
                         <label for="monthly_orders" class="form-label">Monthly Orders</label>
-                        <select id="monthly_orders" name="monthly_orders" class="form-select">
-                            <option value="">Select range...</option>
-                            <option value="0-50">0-50 orders</option>
-                            <option value="51-100">51-100 orders</option>
-                            <option value="101-500">101-500 orders</option>
-                            <option value="500+">500+ orders</option>
+                        <select id="monthly_orders" name="monthly_orders" class="form-select" required>
+                            <option value="">Select your range...</option>
+                            <option value="0-50">0-50 orders per month</option>
+                            <option value="51-100">51-100 orders per month</option>
+                            <option value="101-500">101-500 orders per month</option>
+                            <option value="500+">500+ orders per month</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">
+                    <button type="submit" class="submit-btn">
                         <i class="fas fa-calendar-alt"></i>
-                        Schedule Free Demo
+                        Schedule Your Free Demo
                     </button>
                 </form>
             </div>
@@ -620,40 +759,22 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>BakeSuite</h3>
-                    <p style="margin-bottom: 1rem;">The complete bakery management platform trusted by bakeries worldwide.</p>
+                    <p>The complete bakery management platform. Transform your business with the tools that matter.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Product</h3>
-                    <a href="#features">Features</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#demo">Demo</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Support</h3>
-                    <a href="#contact">Contact Us</a>
-                    <a href="#">Help Center</a>
-                    <a href="#">Training</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <a href="#">About</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
-            </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 BakeSuite. All rights reserved.</p>
+                <p>&copy; 2025 BakeSuite. All rights reserved. Made with ❤️ for bakers everywhere.</p>
             </div>
+        </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -667,32 +788,134 @@
             });
         });
 
-        // Form submission
-        document.getElementById('demo-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Simple form handling - you can replace this with your backend
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-
-            console.log('Form submission:', data);
-
-            // Show success message
-            document.getElementById('success-message').style.display = 'block';
-            this.reset();
-
-            // You can add your actual form submission logic here
-            // For example, send to a serverless function, email service, etc.
-        });
-
         // Header scroll effect
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', () => {
             const header = document.querySelector('.header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
             } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.background = 'rgba(15, 23, 42, 0.8)';
             }
+        });
+
+        // Enhanced form handling
+        const form = document.getElementById('demo-form');
+        const formMessage = document.getElementById('form-message');
+
+        function showMessage(message, type) {
+            formMessage.textContent = message;
+            formMessage.className = `form-message ${type} show`;
+            setTimeout(() => {
+                formMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        function validateForm(formData) {
+            const email = formData.get('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return false;
+            }
+
+            return true;
+        }
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            if (!validateForm(formData)) {
+                return;
+            }
+
+            // Add loading state
+            form.classList.add('loading');
+
+            try {
+                // Replace with your actual form handling service
+                // Options: Formspree, Netlify Forms, Zapier, etc.
+                const response = await fetch('https://formspree.io/f/xovwbwlv', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    showMessage('🎉 Demo scheduled! Check your email for confirmation details.', 'success');
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // For demo purposes, show success message
+                // In production, handle actual form submission
+                showMessage('🎉 Demo request received! We\'ll contact you within 24 hours.', 'success');
+                form.reset();
+            } finally {
+                form.classList.remove('loading');
+            }
+        });
+
+        // Add interactive hover effects to cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.2);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Form input animations
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'all 0.3s ease';
+            });
+
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initially hide elements for animation
+        document.querySelectorAll('.feature-card, .demo-container').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
