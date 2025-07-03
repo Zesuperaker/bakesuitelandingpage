@@ -293,14 +293,14 @@ body {
    FEATURES SECTION
    ================================ */
 .features {
-    padding: 8rem 0;
+    padding: 4rem 0;
     position: relative;
 }
 
 .features h2 {
     text-align: center;
     font-size: 3rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     color: white;
     font-weight: 700;
 }
@@ -848,7 +848,7 @@ body {
     }
 
     .features {
-        padding: 3rem 0;
+        padding: 1rem 0;
     }
 
     .features h2 {
